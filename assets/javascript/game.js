@@ -23,14 +23,14 @@ var darthMaul = {
 	name: "Darth Maul",
 	health: 250,
 	attack: 8,
-	counterAttack: 10,
+	counterAttack: 15,
 };
 
 var darthVader = {
 	name: "Darth Vader",
 	health: 300,
 	attack: 15,
-	counterAttack: 4,
+	counterAttack: 50,
 };
 
 function initPick(chosenCharacter){
@@ -50,7 +50,7 @@ function initDenfender(chosenDefender){
 // function moveYourCharacter(){
 // 	$(".characters").removeClass("available-character").addClass("chosen-character");
 // 	$('#users-choice').append($(".chosen-character"));
-// }
+// };
 
 function moveToEnemies() {
 	$(".characters").removeClass("available-character").addClass("enemy-character");
@@ -60,7 +60,7 @@ function moveToEnemies() {
 // function moveToDefender(){
 // 	$(".characters").removeClass("available-character").addClass("defender-character");
 // 	$('#denfender').append($(".defender-character"));
-// }
+// };
 
 function resetGame(){
 	$('#obi').childern(".health").html(obiWanKenobi.health);
@@ -91,10 +91,15 @@ $(document).ready(function() {
 
 	$("#restart").hide();
 
+
+
 	$("#obi").on("click", function(){
 		console.log("You picked Obi-Wan-Kenobi")
 
+
 		if(characterPicked == false){
+
+			moveToEnemies();
 		
 			$("#game-message").empty();
 
@@ -102,113 +107,122 @@ $(document).ready(function() {
 			characterPicked = true;
 
 
-			$("#obi").removeClass("available-character").addClass("chosen-character");
+			$("#obi").removeClass("enemy-character").addClass("chosen-character");
 			$("#users-choice").append(this);
-			// moveYourCharacter();
-			// moveToEnemies();
 			
-		} else if((characterPicked == true) & (defenderPicked == false)){
+			
+		} else if((characterPicked == true) && (defenderPicked == false)){
 
-			if($("#obi").hasClass("enemy-character")){
+			
 				$("#game-message").empty();
 
 				initDenfender(obiWanKenobi);
 				defenderPicked = true;
 
 				$("#obi").removeClass("enemy-character").addClass("defender-character");
-				$("#defender").append(this);
-				// moveToDefender();
-			}
+				$("#denfender").append(this);
+			
 		}
-	})
 
+	});
 
 	$("#luke").on("click", function(){
-		console.log("You picked Luke Skywalker")
+		console.log("You picked Obi-Wan-Kenobi")
 
 		if(characterPicked == false){
-			 // moveYourCharacter();
+
+			moveToEnemies();
+		
 			$("#game-message").empty();
 
 			initPick(lukeSkywalker);
 			characterPicked = true;
-			moveYourCharacter();
-			$("#luke").removeClass("available-character").addClass("chosen-character");
-			$("#users-choice").append(this);
-			// moveToEnemies();
-			
-		} else if((characterPicked == true) & (defenderPicked == false)){
 
-			if($("#luke").hasClass("enemy-character")){
+
+			$("#luke").removeClass("enemy-character").addClass("chosen-character");
+			$("#users-choice").append(this);
+			
+			
+			
+		} else if((characterPicked == true) && (defenderPicked == false)){
+
+			
 				$("#game-message").empty();
 
 				initDenfender(lukeSkywalker);
 				defenderPicked = true;
 
 				$("#luke").removeClass("enemy-character").addClass("defender-character");
-				$("#defender").append(this);
-				// moveToDefender();
-			}
+				$("#denfender").append(this);
+			
 		}
 	});
 
 	$("#maul").on("click", function(){
-		console.log("You picked Darth Maul")
+		console.log("You picked Obi-Wan-Kenobi")
 
 		if(characterPicked == false){
-			// moveToEnemies();
+
+			moveToEnemies();
+		
 			$("#game-message").empty();
 
 			initPick(darthMaul);
 			characterPicked = true;
 
-			$("#maul").removeClass("available-character").addClass("chosen-character");
+
+			$("#maul").removeClass("enemy-character").addClass("chosen-character");
 			$("#users-choice").append(this);
+			
+			
+		} else if((characterPicked == true) && (defenderPicked == false)){
 
-			// moveToEnemies();
-
-		} else if((characterPicked == true) & (defenderPicked == false)){
-
-			if($("#maul").hasClass("enemy-character")){
+			
 				$("#game-message").empty();
 
 				initDenfender(darthMaul);
 				defenderPicked = true;
 
 				$("#maul").removeClass("enemy-character").addClass("defender-character");
-				$("#defender").append(this);
-			}
+				$("#denfender").append(this);
+			
 		}
 	});
 
-
 	$("#vader").on("click", function(){
-		console.log("You picked Darth Vader")
+		console.log("You picked Obi-Wan-Kenobi")
 
 		if(characterPicked == false){
-			// moveToEnemies();
+
+			moveToEnemies();
+		
 			$("#game-message").empty();
 
 			initPick(darthVader);
 			characterPicked = true;
 
-			$("#vader").removeClass("available-character").addClass("chosen-character");
+
+			$("#vader").removeClass("enemy-character").addClass("chosen-character");
 			$("#users-choice").append(this);
+			
+			
+		} else if((characterPicked == true) && (defenderPicked == false)){
 
-			// moveToEnemies();
-		} else if((characterPicked == true) & (defenderPicked == false)){
-
-			if($("#vader").hasClass("enemy-character")){
+			
 				$("#game-message").empty();
 
 				initDenfender(darthVader);
 				defenderPicked = true;
 
 				$("#vader").removeClass("enemy-character").addClass("defender-character");
-				$("#defender").append(this);
-			}
+				$("#denfender").append(this);
+			
 		}
 	});
+
+
+
+
 
 	$("#attack").on("click", function(){
 		console.log("Attack Button Pushed")
@@ -217,7 +231,7 @@ $(document).ready(function() {
 
 			defender.health = defender.health - character.counterAttack;
 			$(".defender-character").children(".health").html(denfender.health);
-			$("#game-message").html("<p> You attacked" + defender.name + "for" + character.counterAttack + "damage.</p>");
+			$("#game-message").html("<p> You attacked " + defender.name + " for " + character.counterAttack + " damage.</p>");
 			character.counterAttack = character.counterAttack + character.attack;
 
 			if(defender.health > 0){
@@ -250,7 +264,10 @@ $(document).ready(function() {
 	      $("#game-message").html("<p>You must choose an enemy to fight.</p>");
 	    }
 
+
+
 	});
+
 
 	 $("#restart").on("click", function() {
 	    console.log("Restart selected");
@@ -260,11 +277,5 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-
 });
-
 
